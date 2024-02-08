@@ -1,0 +1,47 @@
+---
+title: "Untitled"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r}
+load("~/Documents/izzy work/BRFSS2022_rev.RData")
+```
+```{r}
+library(ggplot2)
+library(tidyverse)
+```
+```{r}
+how_many_rolls <- 100
+sim_rolls <- sample(1:6, how_many_rolls, replace = TRUE)
+```
+```{r}
+# for first time
+lots_of_sim_rolls <- sample(1:6,how_many_rolls, replace = TRUE)
+
+# do 49 more simulations
+for (indx in 1:49) {
+  sim_rolls <- sample(1:6,how_many_rolls, replace = TRUE)
+  lots_of_sim_rolls <- data.frame(lots_of_sim_rolls,sim_rolls)
+  }
+```
+
+```{r}  
+how_many_sims <- 50
+sim_rolls_vec <- sample(1:6,(how_many_rolls*how_many_sims), replace = TRUE) # vectorized version
+```
+```{r}
+if_come_up_6 <- as.numeric(lots_of_sim_rolls == 6)
+mean(if_come_up_6)
+```
+```{r}
+if_come_up_6_vec <- as.numeric(sim_rolls_vec == 6)
+mean(if_come_up_6_vec)
+```
+```{r}
+if_come_up_6 <- (lots_of_sim_rolls == 6)
+```
+
+
